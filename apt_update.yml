@@ -1,0 +1,22 @@
+## This playbook will update all packages on the server
+## It will also update the apt-get repo and cache
+## ansible-playbook -i servers.yml apt_update.yml --ask-become-pass --extra-vars "servers=ubuntu_servers"
+
+- hosts: "{{ servers }}"
+
+  ## Updating one server at a time
+  # serial: 1
+
+  tasks:
+    - name: Update apt-get repo and cache
+      become: yes
+      ansible.builtin.apt:
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+
+    - name: Update all Debian/Ubuntu packages to their latest version
+      become: yes
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
