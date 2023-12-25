@@ -2,7 +2,8 @@
 ## It will also update the apt-get repo and cache
 ## ansible-playbook -i servers.yml apt_update.yml --ask-become-pass --extra-vars "servers=ubuntu_servers"
 
-- hosts: "{{ servers }}"
+## This playbook will select all servers in the inventory file unless "servers" variable is defined.
+- hosts: "{{ servers | default('all') }}"
 
   ## Updating one server at a time
   # serial: 1

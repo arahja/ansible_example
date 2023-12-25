@@ -1,0 +1,21 @@
+---
+
+## If any roles are defined in meta/main.yml those roles will run before these tasks.
+- name: Set the distribution fact
+  ansible.builtin.set_fact:
+    distribution: "{{ ansible_facts.distribution | lower | replace(' ', '_') }}"
+    distribution_major_version: "{{ ansible_facts.distribution_major_version | lower | replace(' ', '_') }}"
+  tags:
+    - always
+
+## Include tasks specific to the version of linux. This is used to route to the correct tasks file depending on the distribution and version of linux.
+- name: Include tasks specific to the version of linux
+  ansible.builtin.include_tasks:
+    file: "{{ lookup('first_found', search_list, errors='ignore') }}"
+  tags:
+    - always
+  vars:
+    search_list:
+      - "{{ distribution }}/{{ distribution }}_{{ distribution_major_version }}.yml"
+      - "{{ distribution }}/default.yml"
+      - "default.yml"

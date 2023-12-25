@@ -1,0 +1,4 @@
+---
+
+- ansible.builtin.debug:
+    msg: "Nothing to do in this role."
