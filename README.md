@@ -8,7 +8,9 @@ apt install -y ansible
 
 ## Hard mode
 
-"ansible-galaxy collection" installs the collections by default into ~/.ansible/collections/ansible_collections. This can be changed by setting the environment variable ANSIBLE_COLLECTIONS_PATHS. and you can also specify the path to install into using the -p
+"ansible-galaxy collection" installs the collections by default into ~/.ansible/collections/ansible_collections. This can be changed by setting the environment variable ANSIBLE_COLLECTIONS_PATHS.
+
+You need to create a config file in ~/.ansible.cfg with the following content. 
 
 
 ```
@@ -24,7 +26,7 @@ ansible-galaxy collection install -r requirements.yml
 
 # Quick start documentation for Ansible
 
-- 
+- https://docs.ansible.com/ansible/latest/getting_started/index.html
 - https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html
 
 
