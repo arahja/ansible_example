@@ -1,0 +1,23 @@
+---
+- hosts: "{{ servers }}"
+  become: yes
+  become_method: sudo
+  tasks:
+
+## To create a hashed password for the user like you see below run the following at the command line:
+## python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+
+    - name: "Create ansible user"
+      user: 
+        name: ansible 
+        state: present
+        createhome: yes
+        shell: /bin/bash
+
+    - name: Grant ansible user sudo rights without password
+      lineinfile: "dest=/etc/sudoers.d/ansible create=yes mode=0440 line='ansible ALL=(ALL) NOPASSWD: ALL'"
+
+    - name: Add management server ansible key to ansible user on remote systems authorized_key file 
+      authorized_key: 
+        user=ansible 
+        key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
