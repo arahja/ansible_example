@@ -13,6 +13,8 @@
         state: present
         createhome: yes
         shell: /bin/bash
+        ## Uncomment the line below and replace the hash with the one created with the python on-liner above to assign a password for the user
+        # password: "$6$rounds=656000$w8PsKlU43B8FO3nV$8GAz00hibxYOLbrgH60e/lDX4DdZE.JuTMSbvdPp0VnjnEY8o5eiLWENYUX3N19XJOT/Y7Z9F02s28m85GUE61"
 
     - name: Grant ansible user sudo rights without password
       ansible.builtin.lineinfile: "dest=/etc/sudoers.d/ansible create=yes mode=0440 line='ansible ALL=(ALL) NOPASSWD: ALL'"
