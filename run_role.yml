@@ -1,7 +1,7 @@
 ---
 ## This is a fancy script to run a specific role or multiple comma seperated roles against a specific server
 
-## Usage example: ansible-playbook test_role.yml -i poc --extra-vars="servers='ubuntu_server_1' role=fix_updates"
+## Usage example: ansible-playbook run_role.yml -i servers.yml --extra-vars="servers='ubuntu_server_1' role=fix_updates"
 
 - name: "Run role(s) {{ role | default (roles, True) }} against {{ servers }}"
   hosts: "{{ servers }}"

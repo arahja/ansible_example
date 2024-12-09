@@ -1,0 +1,17 @@
+---
+## This is a fancy script to run a specific role or multiple comma seperated roles locally
+
+## Usage example: ansible-playbook test_stuff.yml -i servers.yml --extra-vars="servers='ubuntu_server_1' role=fix_updates"
+
+- name: "Run role(s) {{ role | default (roles, True) }} locally"
+  hosts: localhost
+  connection: local
+  ## Defaulting to no because we are running locally. Things break if we try to gather facts.
+  gather_facts: "{{ gf | default('no', True) }}"
+  become: "{{ elevate | default(omit, True) }}"
+  tasks:
+    - include_role:
+        name: "{{ role_name }}"
+      loop: "{{ role | default (roles, True) | split(',') | list }}"
+      loop_control:
+        loop_var: role_name
