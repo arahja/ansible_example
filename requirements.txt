@@ -1,1 +1,2 @@
 ansible-core>=2.13.13,<2.16.0
+## python3 passlib should be installed using OS package manager
