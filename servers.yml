@@ -1,9 +1,12 @@
 all:
   vars:
     domain: domainnamegoeshere
-    environment: prod
+    environment: development
   children:
     servers:
+      vars:
+        # ansible_user: ansible
+        servers_group_specific_var: value
       hosts:
         ubuntu_server_1:
           ansible_host: 192.168.1.1
