@@ -9,4 +9,6 @@
   tasks:
     - name: "Get ansible facts"
       debug:
+        ## Info about ansible_facts
+        ## https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#facts
         var: ansible_facts
