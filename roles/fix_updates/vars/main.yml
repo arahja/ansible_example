@@ -1,1 +1,5 @@
 ---
+## Role-specific variables go here. There is some overlap with defaults and the vars set here.
+## Please see the documentation for more information on how variables are set and used in Ansible.
+## Simple explanation: https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.html#variables
+## Detailed explanation: https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#ansible-variable-precedence

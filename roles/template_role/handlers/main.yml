@@ -1,1 +1,4 @@
 ---
+## Handlers (notify triggers these) for the things that need to happen after changes have been made.
+## Handlers run at the end of the play after all tasks have been completed. If your playbook errors out these will not run.
+## This is useful for things like restarting services after a configuration file has been changed.

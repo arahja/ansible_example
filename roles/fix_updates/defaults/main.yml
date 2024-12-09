@@ -1,1 +1,5 @@
 ---
+## Default values for a role go here. These are the values that will be used if no other values are provided. 
+## This overlaps with vars/main.yml but is used for different purposes. Defaults are used when no other values are provided.
+## Simple explanation: https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.html#variables
+## Detailed explanation: https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#ansible-variable-precedence
