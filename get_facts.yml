@@ -1,0 +1,12 @@
+---
+## This is a fancy script to get ansible facts from a server
+
+## Usage example: ansible-playbook get_facts.yml -i servers.yml --extra-vars "servers='ubuntu_server_1'"
+
+- name: "Getting facts for {{ servers }}"
+  hosts: "{{ servers }}"
+  become: "{{ elevate | default(omit, True) }}"
+  tasks:
+    - name: "Get ansible facts"
+      debug:
+        var: ansible_facts
