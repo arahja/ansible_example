@@ -4,12 +4,12 @@
   become_method: sudo
   tasks:
 
-## To create a hashed password for the user like you see below run the following at the command line:
-## python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+## To create a hashed password for the user like you see below run the following at the command line(requires python3-passlib package):
+## python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.hash(getpass.getpass()))"
 
     - name: "Create ansible user"
-      ansible.builtin.user: 
-        name: ansible 
+      ansible.builtin.user:
+        name: ansible
         state: present
         createhome: yes
         shell: /bin/bash
