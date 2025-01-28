@@ -1,0 +1,17 @@
+---
+## Add your public key to the authorized_keys file of the user on the remote systems
+- hosts: "{{ servers | default('all', True) }}"
+  vars:
+    ## This is a custom variable that you can set with '--extra-vars="key_file_path=/path/to/your/key.pub"'
+    ## For convenience the default value is set to the default location of the rsa ssh public key file
+    pubkey_file_path: "{{ key_file_path | default('~/.ssh/id_rsa.pub', True) }}"
+  tasks:
+    - name: Add management system ssh pubkey to the user on remote systems authorized_key file
+      ## This is a module that manages authorized keys (ssh keys) for particular user accounts
+      ansible.posix.authorized_key:
+        ## The ansible_user_id variable is an ansible built-in fact that holds the user is used to login to the system
+        ## and run this playbook.
+        user: "{{ ansible_user_id }}"
+        ## The lookup function is a jinja2 filter that reads the contents of a file and returns it as a string
+        ## https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_lookups.html#the-lookup-function
+        key: "{{ lookup('file', pubkey_file_path) }}"
