@@ -1,12 +1,20 @@
 all:
   vars:
+    ## Variables defined here will be inherited by all hosts
     domain: domainnamegoeshere
     environment: development
+
+  hosts:
+    ubuntu_server_1:
+      ansible_host: 192.168.1.1
+
   children:
     servers:
       vars:
+        ## Variables defined here will be inherited by all hosts in this group
+        ## These variables will override the ones defined in the all/vars section
         # ansible_user: ansible
         servers_group_specific_var: value
       hosts:
+        ## Reference to the host defined in the all/hosts section
         ubuntu_server_1:
-          ansible_host: 192.168.1.1
