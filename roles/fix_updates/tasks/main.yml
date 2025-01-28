@@ -4,6 +4,8 @@
 ## If any roles are defined in meta/main.yml those roles will run before these tasks.
 - name: Set the distribution fact
   ansible.builtin.set_fact:
+    ## Clean up the distribution name and version to be lowercase and replace spaces with underscores
+    ## This is done using jinja2 filters
     distribution: "{{ ansible_facts.distribution | lower | replace(' ', '_') }}"
     distribution_major_version: "{{ ansible_facts.distribution_major_version | lower | replace(' ', '_') }}"
   tags:
@@ -12,10 +14,13 @@
 ## Include tasks specific to the version of linux. This is used to route to the correct tasks file depending on the distribution and version of linux.
 - name: Include tasks specific to the version of linux
   ansible.builtin.include_tasks:
+    ## This uses a special lookup plugin/function to find the first file in the list that exists
     file: "{{ lookup('first_found', search_list, errors='ignore') }}"
   tags:
     - always
   vars:
+    ## List of files to search for in the roles/fix_updates/tasks directory
+    ## This is using jinja2 templating to create the list of files to search for.
     search_list:
       - "{{ distribution }}/{{ distribution }}_{{ distribution_major_version }}.yml"
       - "{{ distribution }}/default.yml"

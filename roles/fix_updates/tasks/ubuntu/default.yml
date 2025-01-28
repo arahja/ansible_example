@@ -3,6 +3,7 @@
 - name: Enable Automatic Restart of services after upgrade
   become: yes
   ansible.builtin.copy:
+    ## src assumes the file listed is in the "files" directory of this role
     src: 99_auto_upgrade.conf
     dest: /etc/needrestart/conf.d/99_auto_upgrade.conf
     owner: root
@@ -12,6 +13,7 @@
 - name: Disable kernel warning after upgrade
   become: yes
   ansible.builtin.copy:
+    ## src assumes the file listed is in the "files" directory of this role
     src: 99_kernel_warning.conf
     dest: /etc/needrestart/conf.d/99_kernel_warning.conf
     owner: root
