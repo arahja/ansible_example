@@ -15,3 +15,11 @@
         ## The lookup function is a jinja2 filter that reads the contents of a file and returns it as a string
         ## https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_lookups.html#the-lookup-function
         key: "{{ lookup('file', pubkey_file_path) }}"
+
+    ## Uncomment the following lines to give user passwordless sudo rights on the remote system
+    # - name: Grant user sudo rights without password
+    #   become: yes
+    #   ansible.builtin.copy:
+    #     dest: "/etc/sudoers.d/{{ ansible_user_id }}"
+    #     content: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL"
+    #     mode: "0440"

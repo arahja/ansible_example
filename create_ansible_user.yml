@@ -17,7 +17,11 @@
         # password: "$6$rounds=656000$w8PsKlU43B8FO3nV$8GAz00hibxYOLbrgH60e/lDX4DdZE.JuTMSbvdPp0VnjnEY8o5eiLWENYUX3N19XJOT/Y7Z9F02s28m85GUE61"
 
     - name: Grant ansible user sudo rights without password
-      ansible.builtin.lineinfile: "dest=/etc/sudoers.d/ansible create=yes mode=0440 line='ansible ALL=(ALL) NOPASSWD: ALL'"
+      ansible.builtin.lineinfile:
+        dest: /etc/sudoers.d/ansible
+        create: yes
+        mode: 0440
+        line: 'ansible ALL=(ALL) NOPASSWD: ALL'
 
     - name: Add management server ansible key to ansible user on remote systems authorized_key file 
       ansible.posix.authorized_key: 
