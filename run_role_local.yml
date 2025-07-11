@@ -10,8 +10,11 @@
   gather_facts: "{{ gf | default('no', True) }}"
   become: "{{ elevate | default(omit, True) }}"
   tasks:
-    - include_role:
+    - ansible.builtin.include_role:
         name: "{{ role_name }}"
+      tags:
+        ## The "always" tag is a special tag that will trigger the task it's applied to, regardless of the tags specified on the command line.
+        - always
       loop: "{{ role | default (roles, True) | split(',') | list }}"
       loop_control:
         loop_var: role_name
